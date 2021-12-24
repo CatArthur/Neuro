@@ -52,15 +52,23 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Opossum.cs" />
+     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+     <Compile Include="Assets\Scripts\EnemyTrigger.cs" />
+     <Compile Include="Assets\Scripts\Battery.cs" />
      <Compile Include="Assets\Scripts\PlayerCombat.cs" />
      <Compile Include="Assets\Scripts\GLobalData.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\Block.cs" />
+     <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Door.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\Battery.cs" />
+     <Compile Include="Assets\Scripts\Spikes.cs" />
+     <Compile Include="Assets\Scripts\Ray.cs" />
+     <Compile Include="Assets\Scripts\Hint.cs" />
+     <Compile Include="Assets\Scripts\PlayerDeath.cs" />
      <None Include="Assets\Scripts\emotion.txt" />
      <None Include="Assets\Scripts\stop.txt" />
  <Reference Include="UnityEngine">

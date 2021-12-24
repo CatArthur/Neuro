@@ -48,9 +48,6 @@ public class PlayerMovement : MonoBehaviour {
         if (GlobalData.activeEmo==3)
     	    runSpeed = 100f;
         else
-        {
     	    runSpeed = defaultRunSpeed;
-        }
-        
     }
 }

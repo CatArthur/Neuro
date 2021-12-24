@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
-    public int emotion = 2;
-    private float speed = 0.4f;
+    public int emotion;
+    public int index;
+    private float speed = 0.6f;
     public float range = 1.6f;
     public Transform player;
     public Transform table;
@@ -43,7 +44,8 @@ public class Battery : MonoBehaviour
                 {
                     power = 1;
                     full = true;
-                    GlobalData.fullBatteries[emotion] = true;
+                    GlobalData.triggersActivated[index] = true;
+                    GlobalData.checkRoom();
                 }
             }
             else

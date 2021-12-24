@@ -102,10 +102,7 @@ public class PlayerController : MonoBehaviour
 		if (GlobalData.activeEmo==3)
 			m_JumpForce = 800f;
 		else
-		{
 			m_JumpForce = 600f;
-		}
-        
 	}
 }
  

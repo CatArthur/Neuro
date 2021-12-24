@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public Transform respawn;
     
     public Transform attackPoint;
     public Animator animator;
@@ -16,10 +16,10 @@ public class PlayerCombat : MonoBehaviour
 
 
     public int attackDamage = 40;
-    public int healStep = 5;
-    public float attackRate = 2f;
-    public float damageRate = 2f;
-    public float healingRate = 1f;
+    public int healStep = 10;
+    private float attackRate = 3f;
+    private float damageRate = 4f;
+    private float healingRate = 1f;
 
     private int maxHealth=100;
     private int currentHealth=100;
@@ -28,6 +28,8 @@ public class PlayerCombat : MonoBehaviour
     private float nextDamageTime = 0f;
     private float nextHealingTime = 0f;
     // Update is called once per frame
+
+
     void Update()
     {
         UpdatingEmotions();
@@ -39,12 +41,7 @@ public class PlayerCombat : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        
-        if (Input.GetKeyDown("k"))
-        {
-            Heal(10);
-        }
-        
+
     }
     void Attack()
     {
@@ -59,12 +56,13 @@ public class PlayerCombat : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        nextDamageTime = Time.time + 1f / damageRate;
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            Die();
+            GetComponent<PlayerDeath>().Die();
         }
         GlobalData.playerHealth = (float)currentHealth / maxHealth;
     }
@@ -77,12 +75,6 @@ public class PlayerCombat : MonoBehaviour
         GlobalData.playerHealth = (float)currentHealth / maxHealth;
     }
 
-    public void Die()
-    {
-        transform.position = respawn.position;
-        currentHealth = maxHealth;
-        GlobalData.playerHealth = (float)currentHealth / maxHealth;
-    }
 
     private void OnCollisionStay2D(Collision2D other)
     {
@@ -91,15 +83,30 @@ public class PlayerCombat : MonoBehaviour
             if (Time.time > nextDamageTime)
             {
                 TakeDamage(other.collider.GetComponent<Enemy>().touchDamage);
-                nextDamageTime = Time.time + 1f / damageRate;
             }
         }
 
     }
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Spikes"))
+        {
+            if (Time.time > nextDamageTime)
+            {
+                TakeDamage(other.GetComponent<Spikes>().touchDamage);
+            }
+        }
+        if (other.CompareTag("Quit"))
+        {
+            Debug.Log("Quit");
+            Application.Quit();
+        }
+    }
 
     void UpdatingEmotions() {
         if (GlobalData.activeEmo==2)
-            attackDamage = 100;
+            attackDamage = 1000;
         else
         {
             attackDamage = 40;
